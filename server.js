@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 
-const app = express();
+const app = express(); 
 const PORT = Number(process.env.PORT || 3000);
 
 if (!process.env.SESSION_SECRET) {
