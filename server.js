@@ -26,10 +26,6 @@ const dbConfig = {
     rejectUnauthorized: true
   }
 };
-const pool = mysql.createPool({
-  ...dbConfig,
-  waitForConnections: true,  
-
 
 const pool = mysql.createPool({
   ...dbConfig,
