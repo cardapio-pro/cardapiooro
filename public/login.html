@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entrar — Cardápio Pro V10</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#17191d;padding:20px}
+.box{width:100%;max-width:390px;background:#fff;border-radius:16px;padding:30px;box-shadow:0 12px 40px #0006}
+h1{text-align:center;margin:0 0 8px}p{text-align:center;color:#777}
+input{width:100%;padding:13px;margin:7px 0;border:1px solid #ddd;border-radius:9px;font-size:15px}
+button{width:100%;padding:13px;margin-top:10px;border:0;border-radius:9px;background:#39c58a;color:#fff;font-size:15px;font-weight:700;cursor:pointer}
+#error{display:none;color:#c62828;text-align:center;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>Cardápio <span style="color:#39c58a">Pro</span></h1>
+<p>Área exclusiva do administrador</p>
+<form id="loginForm">
+<input id="usuario" name="usuario" placeholder="Usuário" autocomplete="username" required>
+<input id="senha" name="senha" type="password" placeholder="Senha" autocomplete="current-password" required>
+<button type="submit">Entrar</button>
+</form>
+<div id="error">Usuário ou senha incorretos.</div>
+</div>
+<script>
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const error = document.getElementById('error');
+  error.style.display = 'none';
+  const r = await fetch('/api/login', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    credentials:'same-origin',
+    body:JSON.stringify({
+      usuario: document.getElementById('usuario').value.trim(),
+      senha: document.getElementById('senha').value
+    })
+  });
+  if(r.ok) location.href='/';
+  else error.style.display='block';
+});
+</script>
+</body>
+</html>
